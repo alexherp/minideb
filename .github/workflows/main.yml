@@ -101,21 +101,35 @@ jobs:
               "attachments": [
                 {
                   "color": "#CC0000",
-                  "fallback": "Unsuccessful bitnami/minideb CI pipeline",
+                  "fallback": "*<${{github.event.head_commit.committer.name}}>*",
                   "blocks": [
                     {
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "*Unsuccessful `bitnami/minideb` CI pipeline*"
+                        "text": "Pipeline <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|${{ github.run_id }}> has failed in xxxxhour"
                       }
                     },
                     {
                       "type": "section",
-                      "text": {
-                        "type": "mrkdwn",
-                        "text": "The CI pipeline for <${{ github.event.head_commit.url }}|bitnami/minideb@${{ github.event.head_commit.id }}> did not succeed. Check the related <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|action run> for more information."
-                      }
+                      "fields": [
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Branch*\n${{ github.ref_name }}"
+                        },
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Commit*\n${{ github.event.head_commit.message }}"
+                        },
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Failed workflow*\n${{ github.workflow }}"
+                        },
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Failed job*\n${{ github.job }}"
+                        }
+                      ]
                     }
                   ]
                 }
