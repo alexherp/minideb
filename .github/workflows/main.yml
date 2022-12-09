@@ -95,12 +95,12 @@ jobs:
         if: always()
         uses: slackapi/slack-github-action@v1.23.0
         with:
-          channel-id: C04E3CL1WP7
+          channel-id: ${{ secrets.CD_SLACK_CHANNEL_ID }}
           payload: |
             {
               "attachments": [
                 {
-                  "color": ${{ secrets.CD_SLACK_CHANNEL_ID }},
+                  "color": "#CC0000",
                   "fallback": "Unsuccessful bitnami/minideb CI pipeline",
                   "blocks": [
                     {
